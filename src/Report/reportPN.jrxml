@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d47e37a-653d-4502-a80f-a0f4c832d3ba">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="MA_PN" class="java.lang.String">
+		<defaultValueExpression><![CDATA["N001"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     ct_pn.`MA_PN` AS ct_pn_MA_PN,
+     ct_pn.`SLUONG` AS ct_pn_SLUONG,
+     hanghoa.`TEN_HANG` AS hanghoa_TEN_HANG,
+     hanghoa.`GIA` AS hanghoa_GIA,
+     ncc.`TEN_NCC` AS ncc_TEN_NCC,
+     nhanvien.`TEN_NV` AS nhanvien_TEN_NV,
+     p_nhap.`MA_PN` AS p_nhap_MA_PN,
+     p_nhap.`NGAY_LAP` AS p_nhap_NGAY_LAP,
+     p_nhap.`TONG_TIEN` AS p_nhap_TONG_TIEN,
+     ncc.`D_CHI` AS ncc_D_CHI,
+     ncc.`SDT` AS ncc_SDT,
+     hanghoa.`MA_HANG` AS hanghoa_MA_HANG
+FROM
+     `hanghoa` hanghoa INNER JOIN `ct_pn` ct_pn ON hanghoa.`MA_HANG` = ct_pn.`MA_HANG`
+     INNER JOIN `p_nhap` p_nhap ON ct_pn.`MA_PN` = p_nhap.`MA_PN`
+     INNER JOIN `ncc` ncc ON p_nhap.`MA_NCC` = ncc.`MA_NCC`
+     INNER JOIN `nhanvien` nhanvien ON p_nhap.`MA_NV` = nhanvien.`MA_NV`
+WHERE
+     p_nhap.`MA_PN` = $P{MA_PN}]]>
+	</queryString>
+	<field name="ct_pn_MA_PN" class="java.lang.String"/>
+	<field name="ct_pn_SLUONG" class="java.lang.Integer"/>
+	<field name="hanghoa_TEN_HANG" class="java.lang.String"/>
+	<field name="hanghoa_GIA" class="java.lang.Integer"/>
+	<field name="ncc_TEN_NCC" class="java.lang.String"/>
+	<field name="nhanvien_TEN_NV" class="java.lang.String"/>
+	<field name="p_nhap_MA_PN" class="java.lang.String"/>
+	<field name="p_nhap_NGAY_LAP" class="java.sql.Date"/>
+	<field name="p_nhap_TONG_TIEN" class="java.lang.Integer"/>
+	<field name="ncc_D_CHI" class="java.lang.String"/>
+	<field name="ncc_SDT" class="java.lang.String"/>
+	<field name="hanghoa_MA_HANG" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="143" y="12" width="270" height="43" uuid="88f6c629-ddf2-449b-b64a-855cf4d308c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PHIẾU NHẬP HÀNG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="144" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="73" height="35" uuid="78960811-b67d-4380-ba30-ad91e07afb1f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[MÃ PHIẾU:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="84" y="0" width="136" height="35" uuid="efd3cf02-fec2-4051-a86b-6a930b2b57b6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_nhap_MA_PN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="35" width="84" height="35" uuid="368531fe-c8e1-4c56-a197-a23c22e87d23"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[NGÀY LẬP:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="84" y="35" width="155" height="35" uuid="0fed870b-42a6-437a-b81c-3dcd521137a2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_nhap_NGAY_LAP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="71" width="84" height="35" uuid="0b9bb0e9-fb78-4b9e-bc06-488f5c042eeb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[NHÂN VIÊN:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="84" y="71" width="175" height="35" uuid="38b5adf1-4f65-459d-9bf1-538c1088c10e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nhanvien_TEN_NV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="0" width="173" height="35" uuid="6a35c4eb-0ce0-4839-9e95-6d2098c12530"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ncc_TEN_NCC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="270" y="0" width="112" height="35" uuid="56f8ca82-2f5e-407c-b6de-de775c0e1425"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[NHÀ CUNG CẤP:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="35" width="112" height="35" uuid="8ea37516-157f-4808-aa2d-410173fb0030"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[SĐT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="38" width="173" height="32" uuid="6383acff-c68c-4160-b531-9f4ded49782b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ncc_SDT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="270" y="70" width="112" height="35" uuid="fb8c8b11-ecb3-4eba-a060-bbcf134306a9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[ĐỊA CHỈ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="384" y="70" width="171" height="35" uuid="20c3c46c-792b-4cd2-8094-7ec04001703a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ncc_D_CHI}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="84" height="35" uuid="f73b2f9b-2f7f-4824-8377-9318d8b61942"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MÃ HÀNG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="0" width="84" height="35" uuid="6e53c6fe-cbcb-44a8-80b9-675ec68d40c5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[TÊN HÀNG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="0" width="84" height="35" uuid="c0e3828c-36c0-48ad-80e2-79d9cd8d151b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ĐƠN GIÁ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="0" width="84" height="35" uuid="a037219e-b4c0-4e0a-ab6a-31f2cec99b81"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SỐ LƯỢNG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="0" width="102" height="35" uuid="b0ecd67a-8e6f-485a-9b63-9abd8d330ea4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[THÀNH TIỀN]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="38" width="555" height="1" uuid="5507d0da-f0e9-4eae-8350-7f6ec36b2857"/>
+			</line>
+			<line>
+				<reportElement x="0" y="44" width="555" height="1" uuid="8ba58b31-f845-4047-a319-cddfa58fabcd"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="84" height="38" uuid="e2073be2-0ed6-4ded-8e50-8ad059990f68"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hanghoa_MA_HANG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="0" width="155" height="38" uuid="99c59dff-83eb-4391-b975-ebbd595af8ab"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hanghoa_TEN_HANG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="0" width="84" height="38" uuid="39e473ec-c98b-4218-82bb-f81203f2e905"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hanghoa_GIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="0" width="84" height="38" uuid="41be374a-4a00-4494-8851-604f81388fee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ct_pn_SLUONG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="0" width="84" height="38" uuid="7141e348-1554-44ee-8c8d-f2f1075ed35f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Integer($F{ct_pn_SLUONG}.intValue()*$F{hanghoa_GIA}.intValue())]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="48" width="555" height="1" uuid="ab52a3de-b9d6-4314-859f-7f02912e63dd"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="354" y="0" width="84" height="35" uuid="df2c2e8f-6ced-4380-877d-a0ca7c686194"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TỔNG TIỀN:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="454" y="0" width="84" height="38" uuid="1d5662da-a1c1-42f3-9a0f-376b3dea42a4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p_nhap_TONG_TIEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
